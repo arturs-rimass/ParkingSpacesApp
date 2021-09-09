@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ParkingSpacesApp.Models.ParkingSpaces>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">User List</h2>
+        </div>
+        <div class="col-6 text-right" >
+            <a asp-controller="ParkingSpaces" asp-action="Create" class="btn btn-primary">Create new parking space</a>
+            
+        </div>
+    </div>
+
+    <br /><br />
+
+    @if(Model.Count() > 0)
+            {
+               <table class="table table-bordered table-striped" style="width:100%">
+                   <thead>
+                       <tr>
+                           <th>
+                               Floor Number
+                           </th>
+                           <th>
+                               Space Number
+                           </th>
+                           <th>
+                               Has Charger
+                           </th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       @foreach(var obj in Model)
+                {
+                    <tr>
+                        <td width="40%">@obj.FloorNumber</td>
+                        <td width="15%">@obj.SpaceNumber</td>
+                        <td width="15%">@obj.HasCharger</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="ParkingSpaces" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">Edit</a>
+                                <a asp-controller="ParkingSpaces" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">Delete</a>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+                   </tbody>
+               </table>
+            }
+            else
+            {
+                <p>No parking space exists.</p>
+            }
+</div>
